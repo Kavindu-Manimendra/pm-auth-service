@@ -1,8 +1,10 @@
 package org.pm.authservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.pm.authservice.dto.LoginRequestDTO;
 import org.pm.authservice.dto.LoginResponseDTO;
+import org.pm.authservice.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class AuthController {
+
+    private final AuthService authService;
 
     @Operation(summary = "Generate token on user login")
     @PostMapping("/login")
