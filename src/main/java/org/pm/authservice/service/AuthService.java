@@ -1,5 +1,6 @@
 package org.pm.authservice.service;
 
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.pm.authservice.dto.LoginRequestDTO;
 import org.pm.authservice.util.JwtUtil;
@@ -23,5 +24,14 @@ public class AuthService {
                 .map(u -> jwtUtil.generateToken(u.getEmail(), u.getRole()));
 
         return token;
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            jwtUtil.validateToken(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
     }
 }
